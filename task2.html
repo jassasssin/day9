@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Animation Tasks</title>
+  <style>
+    .task-title { font-weight: bold; margin-top: 30px; }
+    .box, .circle, .bouncer, .mover, .grow-box, .pauser, .loader, .box1, .box2, .box3, .box4 {
+      width: 100px; height: 100px; margin: 10px; background-color: rgb(237, 159, 25); position: relative;
+    }
+
+    /* Task 1 */
+    .box.animate1 {
+      animation-name: moveRight;
+      animation-duration: 2s;
+    }
+    @keyframes moveRight {
+      to { transform: translateX(200px); }
+    }
+
+    /* Task 2 */
+    .circle {
+      border-radius: 50%;
+      background-color: crimson;
+      animation: colorChange 2s 1s forwards;
+    }
+    @keyframes colorChange {
+      to { background-color: gold; }
+    }
+
+    /* Task 3 */
+    .bouncer {
+      animation: bounce 0.5s ease-in-out 5;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-50px); }
+    }
+
+    /* Task 4 */
+    .mover {
+      animation: moveLeftRight 2s infinite alternate;
+    }
+    @keyframes moveLeftRight {
+      from { transform: translateX(0); }
+      to { transform: translateX(150px); }
+    }
+
+    /* Task 5 */
+    .box1, .box2, .box3, .box4 {
+      animation-name: timingDemo;
+      animation-duration: 2s;
+      animation-iteration-count: infinite;
+    }
+    .box1 { animation-timing-function: linear; }
+    .box2 { animation-timing-function: ease; }
+    .box3 { animation-timing-function: ease-in; }
+    .box4 { animation-timing-function: ease-out; }
+    @keyframes timingDemo {
+      to { transform: translateX(200px); }
+    }
+
+    /* Task 6 */
+    .grow-box {
+      animation: grow 2s forwards;
+    }
+    @keyframes grow {
+      to { transform: scale(1.5); }
+    }
+
+    /* Task 7 */
+    .box.animate7 {
+      transform: scale(0.5);
+      animation: normalize 2s backwards;
+    }
+    @keyframes normalize {
+      to { transform: scale(1); }
+    }
+
+    /* Task 8 */
+    .pauser {
+      animation: movePause 3s infinite;
+    }
+    @keyframes movePause {
+      0% { left: 0; }
+      100% { left: 200px; }
+    }
+
+    /* Task 9 */
+    .loader {
+      animation: loadBar 2s ease-in-out 3 alternate-reverse both;
+    }
+    @keyframes loadBar {
+      0% { width: 0; background-color: red; }
+      50% { width: 150px; background-color: orange; }
+      100% { width: 300px; background-color: limegreen; }
+    }
+
+    /* Task 10 */
+    .button {
+      position: relative;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .button::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 2px;
+      width: 0;
+      background-color: dodgerblue;
+      transition: width 0.3s ease;
+    }
+    .button:hover::after {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="task-title">Task 1</div>
+  <div class="box animate1"></div>
+
+  <div class="task-title">Task 2</div>
+  <div class="circle"></div>
+
+  <div class="task-title">Task 3</div>
+  <div class="bouncer"></div>
+
+  <div class="task-title">Task 4</div>
+  <div class="mover"></div>
+
+  <div class="task-title">Task 5</div>
+  <div class="box1"></div>
+  <div class="box2"></div>
+  <div class="box3"></div>
+  <div class="box4"></div>
+
+  <div class="task-title">Task 6</div>
+  <div class="grow-box"></div>
+
+  <div class="task-title">Task 7</div>
+  <div class="box animate7"></div>
+
+  <div class="task-title">Task 8</div>
+  <div class="pauser" id="animateBox"></div>
+  <button onclick="togglePlay()">Pause/Play</button>
+
+  <div class="task-title">Task 9</div>
+  <div class="loader"></div>
+
+  <div class="task-title">Task 10</div>
+  <button class="button">Hover me</button>
+
+  <script>
+    function togglePlay() {
+      const el = document.getElementById('animateBox');
+      const style = window.getComputedStyle(el);
+      const currentState = style.getPropertyValue('animation-play-state');
+      el.style.animationPlayState = currentState === 'paused' ? 'running' : 'paused';
+    }
+  </script>
+</body>
+</html>
